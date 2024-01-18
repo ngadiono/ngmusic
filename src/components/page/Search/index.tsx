@@ -48,7 +48,7 @@ const SearchPage = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const fetchData = async (term: string | string[], offset: number) => {
+  const fetchData = async (term: any, offset: number) => {
     try {
       const response = await axios.get(
         `https://itunes.apple.com/search?term=${term}&entity=song&limit=4&offset=${offset}`
@@ -87,7 +87,7 @@ const SearchPage = () => {
 
   const loadMore = () => {
     setOffset(offset + 4);
-    fetchData(searchTerm, offset + 4);
+    fetchData(searchTerm === "" ? term : searchTerm, offset + 4);
   };
 
   const handleSearchFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
