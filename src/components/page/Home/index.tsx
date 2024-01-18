@@ -56,9 +56,7 @@ const Home = () => {
           />
           <Box sx={{ textAlign: "center" }}>
             <Link href={`/search?term=${searchTerm}`}>
-              <div className="button">
-                Search
-              </div>
+              <Button variant="contained">Search</Button>
             </Link>
           </Box>
         </Stack>
