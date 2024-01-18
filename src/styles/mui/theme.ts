@@ -32,7 +32,7 @@ const theme = createTheme({
           box-sizing: border-box;
         }      
       `,
-    },
+    },    
   },
 });
 

@@ -100,19 +100,84 @@ a {
   }
 }
 
-.card {
+.button-primary {
+  margin: 15px 0 0;
+  padding: 13px 116px 11px 117px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  width: 100%;
+  font-size: 14px;
+}
+
+.button-secondary {
+  height: 34px;
+  padding: 10px 29px;
+  border-radius: 17px;
+  background-color: #e2e8f0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.button-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-image: linear-gradient(98deg, #712bda, #a45deb);
+  font-size: 14px;
+  color: #ffffff;
+  width: 100%;
+}
+
+.list-song {
   padding: 12px 12px 11px 10px;
   border-radius: 10px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   background-color: #fff;
+  margin-bottom: 20px;
+  display: flex;
+  font-family: Roboto;
 }
 
-.button {
-  width: 280px;
-  height: 40px;
-  margin: 15px 0 0;
-  padding: 13px 116px 11px 117px;
-  border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.2);
+.list-song img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.list-song .artist {
+  font-size: 10px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.list-song .song {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.list-song .genre {
+  padding: 5px 13px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #10b981;
+  color: #fff;
+  font-size: 10px;
+}
+
+.list-song .price {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #f5b014;
+}
+
+.list-song .price img {
+  width: 16px;
+  height: 16px;
+  margin: 5px;
 }

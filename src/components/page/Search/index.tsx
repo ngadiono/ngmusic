@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import axios from "axios";
+
+import Container from "@mui/material/Container";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Modal from "@mui/material/Modal";
 import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Paper from "@mui/material/Paper";
+
+import Button from "@/components/common/Button";
+import Input from "@/components/common/Input";
 
 const style = {
   position: "absolute" as "absolute",
@@ -36,7 +37,7 @@ interface Track {
 const SearchPage = () => {
   const router = useRouter();
   const { term } = router.query;
-  const [searchTerm, setSearchTerm] = useState<string>(term as string);
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [tracks, setTracks] = useState<Track[]>([]);
   const [displayedTracks, setDisplayedTracks] = useState<Track[]>([]);
   const [loadMoreVisible, setLoadMoreVisible] = useState(true);
@@ -94,13 +95,21 @@ const SearchPage = () => {
     setTracks([]);
     setDisplayedTracks([]);
     fetchData(searchTerm, 1);
+    setLoadMoreVisible(true);
     handleClose();
   };
 
   return (
-    <>
+    <Container maxWidth="sm" style={{ paddingBottom: "40px" }}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar
+          position="fixed"
+          style={{
+            height: "60px",
+            boxShadow: "0 0 6px 0 rgba(148, 77, 230, 0.75)",
+            backgroundImage: "linear-gradient(100deg, #712bda, #a45deb 100%)",
+          }}
+        >
           <Toolbar>
             <IconButton
               size="large"
@@ -111,45 +120,81 @@ const SearchPage = () => {
             >
               <img alt="icon menu" src="/assets/icons/menu.svg" />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, textAlign: "center" }}
+            >
               ngmusic
             </Typography>
-            <div color="inherit" onClick={handleOpen}>
+            <div style={{ cursor: "pointer" }} onClick={handleOpen}>
               <img alt="icon menu" src="/assets/icons/search.svg" />
             </div>
           </Toolbar>
         </AppBar>
       </Box>
 
-      <p>
-        Search result for :{" "}
-        <span style={{ textTransform: "capitalize" }}>{searchTerm}</span>
-      </p>
+      <Box pt={"100px"}>
+        <Box mb="38px">
+          Search result for :{" "}
+          <span
+            style={{
+              textTransform: "capitalize",
+              color: "#7b34dd",
+              fontSize: "18px",
+              fontWeight: "bold",
+            }}
+          >
+            {searchTerm === "" ? term : searchTerm}
+          </span>
+        </Box>
 
-      {tracks.map((track, index) => (
-        <div key={index} className="card">
-          <img
-            alt={track.artistName}
-            src={track.artworkUrl100}
-            width={100}
-            height={100}
-          />
-          <p>{track.artistName}</p>
-          <p>{track.trackName}</p>
-          <p>{track.primaryGenreName}</p>
-          <p>{track.trackPrice}</p>
-        </div>
-      ))}
+        {tracks.map((track, index) => (
+          <div key={index} className="list-song">
+            <img
+              alt={track.artistName}
+              src={track.artworkUrl100}
+              width={100}
+              height={100}
+            />
+            <div style={{ flexGrow: 1 }}>
+              <Box display="flex" flexDirection="column">
+                <Box flexGrow={1}>
+                  <p className="artist">{track.artistName}</p>
+                  <p className="song">{track.trackName}</p>
+                </Box>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="flex-end"
+                  mt="30px"
+                >
+                  <p className="genre">{track.primaryGenreName}</p>
+                  <p className="price">
+                    <img
+                      alt="icon dollar"
+                      src="/assets/icons/currency-dollar.svg"
+                    />
+                    {track.trackPrice}
+                  </p>
+                </Box>
+              </Box>
+            </div>
+          </div>
+        ))}
 
-      {loadMoreVisible && (
-        <Button
-          onClick={loadMore}
-          disabled={!loadMoreVisible}
-          variant="contained"
-        >
-          Load More
-        </Button>
-      )}
+        {loadMoreVisible && (
+          <Box display="flex" justifyContent="center">
+            <Button
+              className="button-secondary"
+              onClick={loadMore}
+              disabled={!loadMoreVisible}
+            >
+              Load More
+            </Button>
+          </Box>
+        )}
+      </Box>
 
       <Modal
         open={open}
@@ -161,27 +206,24 @@ const SearchPage = () => {
           <Stack
             component="form"
             sx={{
-              width: "25ch",
+              width: "100%",
             }}
             spacing={2}
             noValidate
             autoComplete="off"
             onSubmit={handleSearchFormSubmit}
           >
-            <TextField
-              hiddenLabel
-              variant="filled"
-              size="small"
+            <Input
               placeholder="Artist / Album / Title"
               onChange={(e) => setSearchTerm(e?.target.value)}
             />
-            <Button variant="contained" type="submit">
+            <Button className="button-modal" type="submit">
               Search
             </Button>
           </Stack>
         </Box>
       </Modal>
-    </>
+    </Container>
   );
 };
 

@@ -5,8 +5,9 @@ import Link from "next/link";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
+
+import Input from "@/components/common/Input";
+import Button from "@/components/common/Button";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -21,6 +22,7 @@ const Home = () => {
           backgroundRepeat: "no-repeat",
           height: "100vh",
           paddingBottom: "40px",
+          padding: "30px",
         }}
       >
         <Box
@@ -40,24 +42,25 @@ const Home = () => {
         </Box>
         <Stack
           component="form"
-          sx={{
-            width: "25ch",
-          }}
           spacing={2}
           noValidate
           autoComplete="off"
+          style={{ width: "100%" }}
         >
-          <TextField
-            hiddenLabel
-            variant="filled"
-            size="small"
+          <Input
             placeholder="Artist / Album / Title"
             onChange={(e) => setSearchTerm(e?.target.value)}
           />
           <Box sx={{ textAlign: "center" }}>
-            <Link href={`/search?term=${searchTerm}`}>
-              <Button variant="contained">Search</Button>
-            </Link>
+            {searchTerm === "" ? (
+              <Button className="button-primary" disabled>
+                Search
+              </Button>
+            ) : (
+              <Link href={`/search?term=${searchTerm}`}>
+                <Button className="button-primary">Search</Button>
+              </Link>
+            )}
           </Box>
         </Stack>
       </Stack>
