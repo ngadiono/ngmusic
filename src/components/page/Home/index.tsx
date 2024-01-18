@@ -12,7 +12,7 @@ import Button from "@/components/common/Button";
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{ padding: 0 }}>
       <Stack
         direction="column"
         justifyContent="center"
@@ -41,8 +41,7 @@ const Home = () => {
           />
         </Box>
         <Stack
-          component="form"
-          spacing={2}
+          component="form"          
           noValidate
           autoComplete="off"
           style={{ width: "100%" }}

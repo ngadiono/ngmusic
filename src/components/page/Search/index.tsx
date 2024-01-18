@@ -20,10 +20,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
+  bgcolor: "transparent",
+  padding: "0 30px",
 };
 
 interface Track {
@@ -201,6 +199,12 @@ const SearchPage = () => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        className="modal"
+        BackdropProps={{
+          style: {
+            backgroundColor: "rgba(28, 28, 45, 0.9)",
+          },
+        }}
       >
         <Box sx={style}>
           <Stack
@@ -213,11 +217,25 @@ const SearchPage = () => {
             autoComplete="off"
             onSubmit={handleSearchFormSubmit}
           >
+            <p
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                textAlign: "center",
+                color: "#ffffff",
+              }}
+            >
+              Search
+            </p>
             <Input
               placeholder="Artist / Album / Title"
               onChange={(e) => setSearchTerm(e?.target.value)}
             />
-            <Button className="button-modal" type="submit">
+            <Button
+              className="button-modal"
+              type="submit"
+              disabled={searchTerm === ""}
+            >
               Search
             </Button>
           </Stack>

@@ -101,13 +101,13 @@ a {
 }
 
 .button-primary {
-  margin: 15px 0 0;
-  padding: 13px 116px 11px 117px;
+  margin: 15px 0 0;  
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.2);
   color: #fff;
   width: 100%;
   font-size: 14px;
+  height: 40px;
 }
 
 .button-secondary {
@@ -128,6 +128,7 @@ a {
   font-size: 14px;
   color: #ffffff;
   width: 100%;
+  height: 40px;
 }
 
 .list-song {

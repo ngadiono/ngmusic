@@ -10,8 +10,7 @@ const Input = styled(InputBase)(({ theme }) => ({
     borderColor: theme.palette.mode === "light" ? "#E0E3E7" : "#2D3843",
     fontSize: 12,
     width: "100%",
-    padding: "10px 12px",
-    height: 40,
+    height: 29,
     textAlign: "center",
   },
   "& .MuiInputBase-input::placeholder": {
