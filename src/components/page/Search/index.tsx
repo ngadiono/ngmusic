@@ -57,8 +57,13 @@ const SearchPage = () => {
         const data = response.data;
         const newTracks = data.results || [];
 
-        setTracks([...tracks, ...newTracks]);
-        setDisplayedTracks([...tracks, ...newTracks]);
+        if (open) {
+          setTracks([[], ...newTracks]);
+          setDisplayedTracks([[], ...newTracks]);
+        } else {
+          setTracks([...tracks, ...newTracks]);
+          setDisplayedTracks([...tracks, ...newTracks]);
+        }
 
         if (newTracks.length < 4) {
           setLoadMoreVisible(false);
@@ -118,7 +123,7 @@ const SearchPage = () => {
 
       <p>
         Search result for :{" "}
-        <span style={{ textTransform: "capitalize" }}>{term}</span>
+        <span style={{ textTransform: "capitalize" }}>{searchTerm}</span>
       </p>
 
       {tracks.map((track, index) => (
@@ -168,7 +173,6 @@ const SearchPage = () => {
               variant="filled"
               size="small"
               placeholder="Artist / Album / Title"
-              value={searchTerm}
               onChange={(e) => setSearchTerm(e?.target.value)}
             />
             <Button variant="contained" type="submit">
